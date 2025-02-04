@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: allos
 Version: 0.0.2
 Summary: Storage and visualization of long read based single cell datasets
@@ -33,6 +33,18 @@ Requires-Dist: pyranges
 Requires-Dist: pyfaidx
 Requires-Dist: numpy
 Provides-Extra: dev
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 # allos
 
