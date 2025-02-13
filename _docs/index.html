@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Storage and visualization of long read based single cell datasets">
+<meta name="description" content="An Isoform resoloution single cell RNA-seq toolkit.">
 
-<title>allos</title>
+<title>Allos – allos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fad5ab29a14bbe0a7a7d29177f3f13bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9bc060a4898e0fcb4a0a3e2203846fdc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,20 +101,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="allos">
-<meta property="og:description" content="Storage and visualization of long read based single cell datasets">
-<meta property="og:image" content="https://cobioda.github.io/allos/index_files/figure-html/cell-3-output-1.png">
+<meta property="og:title" content="Allos – allos">
+<meta property="og:description" content="An Isoform resoloution single cell RNA-seq toolkit.">
+<meta property="og:image" content="https://cobioda.github.io/allos/resources/logo_allos.png">
 <meta property="og:site_name" content="allos">
-<meta property="og:image:height" content="790">
-<meta property="og:image:width" content="1570">
-<meta name="twitter:title" content="allos">
-<meta name="twitter:description" content="Storage and visualization of long read based single cell datasets">
-<meta name="twitter:image" content="https://cobioda.github.io/allos/index_files/figure-html/cell-3-output-1.png">
-<meta name="twitter:image-height" content="790">
-<meta name="twitter:image-width" content="1570">
+<meta name="twitter:title" content="Allos – allos">
+<meta name="twitter:description" content="An Isoform resoloution single cell RNA-seq toolkit.">
+<meta name="twitter:image" content="https://cobioda.github.io/allos/resources/logo_allos.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -139,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Allos</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -153,8 +152,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">allos</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Allos</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -171,32 +170,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./002_transcript_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">002_transcript_data.html</span></a>
+  <a href="./transcript_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transcript Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./003_readers_tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">003_readers_tests.html</span></a>
+  <a href="./readers_tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readers</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./004_anndata_iso.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">004_anndata_iso.html</span></a>
+  <a href="./anndata_iso.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">IsoAdata</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./005_switch_search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">005_switch_search.html</span></a>
+  <a href="./switch_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Detecting Switches</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./006_gene_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">006_gene_report.html</span></a>
+  <a href="./gene_report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gene Report Module</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preprocesing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visuals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualizations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metacells.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metacells</span></a>
   </div>
 </li>
     </ul>
@@ -210,31 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
-  <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a>
-  <ul class="collapse">
-  <li><a href="#plot-transcript-module" id="toc-plot-transcript-module" class="nav-link" data-scroll-target="#plot-transcript-module">Plot transcript module</a></li>
-  <li><a href="#gene-report-module" id="toc-gene-report-module" class="nav-link" data-scroll-target="#gene-report-module">Gene report module</a></li>
-  </ul></li>
-  <li><a href="#initialization" id="toc-initialization" class="nav-link" data-scroll-target="#initialization">1. Initialization</a>
-  <ul class="collapse">
-  <li><a href="#gene-specific-transcripts" id="toc-gene-specific-transcripts" class="nav-link" data-scroll-target="#gene-specific-transcripts">Gene-Specific Transcripts</a></li>
-  <li><a href="#gene-summary" id="toc-gene-summary" class="nav-link" data-scroll-target="#gene-summary">Gene Summary</a></li>
-  </ul></li>
-  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
-  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test">Likelihood Ratio Test</a>
-  <ul class="collapse">
-  <li><a href="#gene-specific-transcripts-1" id="toc-gene-specific-transcripts-1" class="nav-link" data-scroll-target="#gene-specific-transcripts-1">Gene-Specific Transcripts</a></li>
-  <li><a href="#gene-summary-1" id="toc-gene-summary-1" class="nav-link" data-scroll-target="#gene-summary-1">Gene Summary</a></li>
-  </ul></li>
-  <li><a href="#statistical-analysis-1" id="toc-statistical-analysis-1" class="nav-link" data-scroll-target="#statistical-analysis-1">Statistical Analysis</a></li>
-  <li><a href="#likelihood-ratio-test-1" id="toc-likelihood-ratio-test-1" class="nav-link" data-scroll-target="#likelihood-ratio-test-1">Likelihood Ratio Test</a>
-  <ul class="collapse">
-  <li><a href="#gene-specific-transcripts-2" id="toc-gene-specific-transcripts-2" class="nav-link" data-scroll-target="#gene-specific-transcripts-2">Gene-Specific Transcripts</a></li>
-  <li><a href="#gene-summary-2" id="toc-gene-summary-2" class="nav-link" data-scroll-target="#gene-summary-2">Gene Summary</a></li>
-  </ul></li>
-  <li><a href="#statistical-analysis-2" id="toc-statistical-analysis-2" class="nav-link" data-scroll-target="#statistical-analysis-2">Statistical Analysis</a></li>
-  <li><a href="#likelihood-ratio-test-2" id="toc-likelihood-ratio-test-2" class="nav-link" data-scroll-target="#likelihood-ratio-test-2">Likelihood Ratio Test</a></li>
-  <li><a href="#isoform-rating" id="toc-isoform-rating" class="nav-link" data-scroll-target="#isoform-rating">Isoform Rating</a></li>
+  <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/cobioda/allos/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -243,12 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">allos</h1>
+<h1 class="title">Allos</h1>
 </div>
 
 <div>
   <div class="description">
-    Storage and visualization of long read based single cell datasets
+    An Isoform resoloution single cell RNA-seq toolkit.
   </div>
 </div>
 
@@ -266,157 +259,778 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="resources/logo_allos.png" class="img-fluid figure-img"></p>
+<figcaption>Allos_logo</figcaption>
+</figure>
+</div>
+<p><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" class="img-fluid" alt="License"></a><a href="https://github.com/a-diamant/allos/actions/workflows/deploy.yaml"><img src="https://github.com/a-diamant/allos/actions/workflows/deploy.yaml/badge.svg" class="img-fluid" alt="Deploy to GitHub Pages"></a> <a href="https://github.com/a-diamant/allos/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/a-diamant/allos/actions/workflows/pages/pages-build-deployment/badge.svg" class="img-fluid" alt="pages-build-deployment"></a><a target="_blank" href="https://colab.research.google.com/github/a-diamant/allos/blob/develop/nbs/index.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"> </a><img src="https://img.shields.io/pypi/v/allos.png" class="img-fluid" alt="PyPI - Version"></p>
+<p>Single-cell RNA sequencing (scRNA-seq) has revolutionized our understanding of cellular diversity by allowing the study of gene expression at the individual cell level. However, traditional methods of quantification obscure the most fine-grained transcriptional layer—the individual transcripts at sequence-level resolution—in favor of gene-level binning. This strategy is useful when the sequencing read length is short, as it avoids the difficult task of transcript assembly, which is made even more challenging by the nature of single-cell data.</p>
+<p>Traditional scRNA-seq methods often rely on short-read sequencing technologies, which can limit the ability to resolve full-length transcripts and isoforms. Long-read sequencing technologies, such as those provided by Oxford Nanopore and PacBio, overcome this limitation by producing reads that span entire transcripts. This capability is crucial for accurately identifying and characterizing novel isoforms and understanding the complexity of transcriptomes in single cells. By integrating long-read sequencing with single-cell approaches, researchers can gain deeper insights into cellular heterogeneity and the functional implications of transcriptomic variations.</p>
+<p>Allos is designed to give users familiar with single-cell analysis, and indeed object-oriented programming in general, an extended toolkit wrapping around Scanpy and the wider scverse to facilitate analysis workflows of this type of data. Allos is the culmination of many smaller individualized scripts packaged together into a common framework centered on anndata objects. It also contains many recreations (of varying faithfulness to their originals*) of functions proposed by others in other libraries, languages, or contexts—we by no means intend to plagiarize these methods but only expand them to a wider audience.</p>
+<p>Allos intends to offer a full suite of modules for every step of single-cell isoform resolution data, from preprocessing, working with annotations, plotting, identifying differential features, isoform switches, and more. We hope to expand Allos with the input of our user base as the field of long-read single-cell further matures.</p>
 <section id="install" class="level2">
 <h2 class="anchored" data-anchor-id="install">Install</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install allos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="basic-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="basic-workflow">Basic workflow</h2>
-<section id="plot-transcript-module" class="level3">
-<h3 class="anchored" data-anchor-id="plot-transcript-module">Plot transcript module</h3>
-<p>Plot transcript module can be used on its own to explore the structure on known and especialy new transcripts. The long read sequencing methods are great to discovar new isoforms and it is often important to compare their structure with known isoforms. Transcript’s structure can be visualized with <strong>draw_transcript</strong> function from custom coordiantes or directly by indicating a valid Ensemble id.</p>
-<div id="cell-6" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.transcript_plots <span class="im">as</span> ptr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first thing we need to work with Allos is data. Our goal is for Allos to handle many, if not all, types of single-cell isoform resolution data, making it platform and protocol agnostic. While it is important to consider the biases, strengths, limitations, and caveats of each approach, all methods utilize a transcript matrix from which a gene matrix can be derived. Allos also allows users to supply their own custom annotations in the form of a GTF or use a reference annotation. If a reference annotation is provided, all plotting functions will use the underlying GTF to retrieve the transcript information.</p>
+<p>To help you follow the basic workflow, we provide an easy way to download one of our test datasets. The Sicelore dataset comprises 1,121 single-cell transcriptomes from two technical replicates derived from an embryonic day 18 (E18) mouse brain, consisting of 951 cells and 190 cells. The dataset was generated using the 10x Genomics Chromium system and sequenced with both Oxford Nanopore and Illumina platforms, producing 322 million Nanopore reads and 70 million Illumina reads for the 951-cell replicate, and 32 million Nanopore reads with 43 million Illumina reads for the 190-cell replicate. The dataset captured a median of 2,427 genes and 6,047 UMIs per cell, enabling the identification of 33,002 annotated transcript isoforms and 4,388 novel isoforms. Major cell types in the dataset include radial glia, cycling radial glia, intermediate progenitors, Cajal-Retzius cells, and maturing GABAergic and glutamatergic neurons, providing a detailed resource for studying transcriptome-wide alternative splicing, isoform expression, and sequence diversity during mouse brain development.</p>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.preprocessing <span class="im">as</span> pp</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sicelore_mouse_data <span class="op">=</span> pp.process_mouse_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+🔎 Looking for file at: /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/e18.mouse.clusters.csv
+✅ File found at: /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/e18.mouse.clusters.csv
+✅ File already exists at: /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_1.txt.gz
+
+🔄 Decompressing /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_1.txt.gz to /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_1.txt...
+✅ Decompression complete.
+Test data (mouse_1) downloaded successfully
+✅ File already exists at: /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_2.txt.gz
+
+🔄 Decompressing /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_2.txt.gz to /data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/allos/resources/data/mouse_2.txt...
+✅ Decompression complete.
+Test data (mouse_2) downloaded successfully</code></pre>
 </div>
-<p>Multiple transcripts can be vizualized on one panel with the function draw_transcripts_list where the transcripts’ ids are provided as a list. The list can be a mix of known and novev, custom defined transcripts:</p>
-<div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ptr.TranscriptPlots.draw_transcripts_list([<span class="st">"ENSMUST00000030636"</span>, <span class="st">"ENSMUST00000105867"</span>, <span class="st">"ENSMUST00000105868"</span>, <span class="st">"ENSMUST00000130253"</span>, <span class="st">"ENSMUST00000127279"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/anndata/_core/anndata.py:1754: UserWarning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`.
+  utils.warn_names_duplicates("obs")</code></pre>
+</div>
+</div>
+<p>In this dataset, we observe the mouse data organized in a cell-by-transcript matrix format. This structure allows us to examine the expression levels of individual transcripts across different cells. Additionally, each transcript is associated with a specific gene, providing a hierarchical view of gene expression. This organization is crucial for understanding the relationship between transcripts and their corresponding genes.</p>
+<div id="cell-11" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sicelore_mouse_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>View of AnnData object with n_obs × n_vars = 1109 × 31986
+    obs: 'batch', 'cell_type'
+    var: 'geneId'</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sicelore_mouse_data.var.head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       geneId
+transcriptId                 
+ENSMUST00000156717.1     Klc2
+ENSMUST00000212520.1   Capn15
+ENSMUST00000025798.12    Klc2
+ENSMUST00000231280.1    Eva1c
+ENSMUST00000039286.4     Atg5
+ENSMUST00000144552.7   Znhit3
+ENSMUST00000112304.8    Ppm1b
+ENSMUST00000162041.7     Gcc2
+ENSMUST00000053506.6     Bbs1
+ENSMUST00000028207.12    Crat</code></pre>
+</div>
+</div>
+<p>IsoAdata objects are fully compatible with standard AnnData objects. We can use them just like any conventional AnnData instance. Let’s take a closer look at how they function.</p>
+<div id="cell-14" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scanpy <span class="im">as</span> sc</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the original data to preserve it</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>original_sicelore_mouse_data <span class="op">=</span> sicelore_mouse_data.copy()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the operations</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>sc.pp.normalize_total(sicelore_mouse_data, target_sum<span class="op">=</span><span class="fl">1e6</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>sc.pp.log1p(sicelore_mouse_data)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the top 5000 highly variable genes</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>sc.pp.highly_variable_genes(sicelore_mouse_data, n_top_genes<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>sicelore_mouse_data <span class="op">=</span> sicelore_mouse_data[:, sicelore_mouse_data.var.highly_variable]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>sc.pp.neighbors(sicelore_mouse_data)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>sc.tl.umap(sicelore_mouse_data)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>sc.pl.umap(sicelore_mouse_data, color<span class="op">=</span><span class="st">'cell_type'</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore the original data</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>sicelore_mouse_data <span class="op">=</span> original_sicelore_mouse_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/scanpy/preprocessing/_normalization.py:207: UserWarning: Received a view of an AnnData. Making a copy.
+  view_to_actual(adata)
+/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/scanpy/tools/_utils.py:41: UserWarning: You’re trying to run this on 5000 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+  warnings.warn(
+/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="gene-report-module" class="level3">
-<h3 class="anchored" data-anchor-id="gene-report-module">Gene report module</h3>
-<p>Offers a complete pipeline to discover and visualize differentially expressed and switching isoforms among different cell types and conditions in long reads based single RNA-seq data. Allos supports several technologies and tools producing long reads based scRNA seq datasets: Oxford Nanopore, PacBio, Smartseq2 and such tools as Sicelore, Isocsceles, Kallisto etc. The output from other tools can be adapted to a universal reader.</p>
-<div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.gene_report <span class="im">as</span> gr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can easily collapse the transcript matrix to a gene matrix and see how the dimensionality reduction plot differs.</p>
+<div id="cell-16" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.preprocessing <span class="im">as</span> pp</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>gene_anndata <span class="op">=</span> pp.get_sot_gene_matrix(sicelore_mouse_data)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the gene matrix data to preserve it</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>original_gene_anndata <span class="op">=</span> gene_anndata.copy()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the operations on the gene matrix</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>sc.pp.normalize_total(gene_anndata, target_sum<span class="op">=</span><span class="fl">1e6</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>sc.pp.log1p(gene_anndata)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the top 5000 highly variable genes for gene_anndata</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>sc.pp.highly_variable_genes(gene_anndata, n_top_genes<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>gene_anndata <span class="op">=</span> gene_anndata[:, gene_anndata.var.highly_variable]</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>sc.pp.neighbors(gene_anndata)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>sc.tl.umap(gene_anndata)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>sc.pl.umap(gene_anndata, color<span class="op">=</span><span class="st">'cell_type'</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore the original gene matrix data</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>gene_anndata <span class="op">=</span> original_gene_anndata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/scanpy/tools/_utils.py:41: UserWarning: You’re trying to run this on 5002 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+  warnings.warn(</code></pre>
 </div>
-</section>
-</section>
-<section id="initialization" class="level2">
-<h2 class="anchored" data-anchor-id="initialization">1. Initialization</h2>
-<p>The AnnDataIso object initializes with:</p>
-<p>Input: AnnData object and an optional cell types DataFrame. ### Setup: Filters genes with multiple isoforms. Calculates isoform percentages per gene for each cell type. Prepares the data for downstream analyses. ### Usage:</p>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> al.readers_tests.download_test_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>File downloaded successfully
-File extracted successfully</code></pre>
-</div>
-</div>
-<div id="cell-13" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>adata_iso <span class="op">=</span> al.switch_search.create_iso_adata(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adata_iso <span class="op">=</span> al.anndata_iso.AnnDataIso(adata_iso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 100x100 with 0 Axes&gt;</code></pre>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<ol start="4" type="1">
-<li>Data Visualization</li>
-</ol>
-<ol type="a">
-<li>Isoform Summary Method: plot_isoforms_summary() Purpose: Summarizes isoform switching and frequencies across genes. Subplots: Bar plot: Percentage of genes with multiple isoforms. Bar plot: Frequency of isoforms per gene. Boxplot: Number of genes expressed per cell type. Usage:</li>
-</ol>
-<section id="gene-specific-transcripts" class="level3">
-<h3 class="anchored" data-anchor-id="gene-specific-transcripts">Gene-Specific Transcripts</h3>
-<p>Method: plot_transcripts_per_cell_type() Visualizes isoform expression across cell types for a specific gene. Parameters: gene_name: The gene to visualize. trs_to_show: List of transcript IDs to include (optional). Usage:</p>
-<div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adata_iso.plot_transcripts_per_cell_type(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="gene-summary" class="level3">
-<h3 class="anchored" data-anchor-id="gene-summary">Gene Summary</h3>
-<p>Method: draw_gene_summary() Purpose: Generates a comprehensive visualization of transcript counts, per-cell-type breakdown, and transcripts structures for a specific gene. Parameters: gene_name: Target gene for visualization. trs_to_show: List of transcripts to highlight. Usage:</p>
-<div id="cell-19" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adata_iso.draw_gene_summary(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s examine the most differentially expressed genes across the pre-annotated cell types.</p>
+<div id="cell-18" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform differential expression analysis to rank genes on the gene matrix</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sc.tl.rank_genes_groups(gene_anndata, <span class="st">'cell_type'</span>, method<span class="op">=</span><span class="st">'t-test'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ranked gene groups with adjusted figure size</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sc.pl.rank_genes_groups(gene_anndata, n_genes<span class="op">=</span><span class="dv">20</span>, sharey<span class="op">=</span><span class="va">False</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>WARNING: It seems you use rank_genes_groups on the raw count data. Please logarithmize your data before calling rank_genes_groups.</code></pre>
 </div>
-</section>
-</section>
-<section id="statistical-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
-<ol type="a">
-<li>Find Switching Isoforms Method: find_switching_isoforms() Purpose: Identifies genes with significant isoform switching between cell types using statistical tests. Parameters: cell_group_column: Column specifying cell group labels. min_count: Minimum expression count threshold. min_diff: Minimum expression difference for isoform detection. Usage:</li>
-</ol>
-<div id="cell-21" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>switching_genes <span class="op">=</span> adata_iso.find_switching_isoforms(cell_group_column<span class="op">=</span><span class="st">"cell_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-</section>
-<section id="likelihood-ratio-test" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-ratio-test">Likelihood Ratio Test</h2>
-<p>Method: __compare_groups() Purpose: Tests for significant isoform usage differences between two groups. Parameters: group_1_label and group_2_label: Names of the groups to compare. cell_group_column: Column specifying cell group labels. gene_id: Gene ID to test.</p>
+</div>
+</div>
+<p>Now, let’s examine the differentially expressed transcripts. Unlike our previous focus on genes, we will shift our attention to the transcript level. The finest resoloution transcriptional layer. We should still see considerable gene wise overlap in the two rankings as we would expect in many cases the higher gene count to be driven by a single isoform.</p>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate the gene name before the transcript ID in the transcript matrix</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>transcript_matrix <span class="op">=</span> sicelore_mouse_data.copy()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'geneId' to string to avoid TypeError when concatenating with index</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>transcript_matrix.var[<span class="st">'geneId'</span>] <span class="op">=</span> transcript_matrix.var[<span class="st">'geneId'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'gene_name' and 'transcript_id' are columns in the var DataFrame of the AnnData object</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>transcript_matrix.var[<span class="st">'gene_transcript_id'</span>] <span class="op">=</span> transcript_matrix.var[<span class="st">'geneId'</span>] <span class="op">+</span> <span class="st">'_'</span> <span class="op">+</span> transcript_matrix.var.index.astype(<span class="bu">str</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Truncate the gene_transcript_id to fit better in plots</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>transcript_matrix.var[<span class="st">'gene_transcript_id'</span>] <span class="op">=</span> transcript_matrix.var[<span class="st">'gene_transcript_id'</span>].<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the var index to use the new truncated gene_transcript_id</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>transcript_matrix.var.index <span class="op">=</span> transcript_matrix.var[<span class="st">'gene_transcript_id'</span>]</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Log transform and CPM normalize the transcript matrix</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>sc.pp.normalize_total(transcript_matrix, target_sum<span class="op">=</span><span class="fl">1e6</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>sc.pp.log1p(transcript_matrix)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform differential expression analysis to rank genes on the transcript matrix</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>sc.tl.rank_genes_groups(transcript_matrix, <span class="st">'cell_type'</span>, method<span class="op">=</span><span class="st">'t-test'</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ranked gene groups with adjusted figure size</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>sc.pl.rank_genes_groups(transcript_matrix, n_genes<span class="op">=</span><span class="dv">20</span>, sharey<span class="op">=</span><span class="va">False</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lets visualise the isoforms of a specific gene Nnat based on multiple transcripts from this gene in the top rankings of imature GABAergic vs rest.</p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the operations on a copy of the sicelore_mouse_data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sicelore_mouse_data_copy <span class="op">=</span> sicelore_mouse_data.copy()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sc.pp.normalize_total(sicelore_mouse_data_copy, target_sum<span class="op">=</span><span class="fl">1e6</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>sc.pp.log1p(sicelore_mouse_data_copy)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>sc.pp.neighbors(sicelore_mouse_data_copy)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>sc.tl.umap(sicelore_mouse_data_copy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/data/analysis/data_mcandrew/Allos_new/allos_env/lib/python3.9/site-packages/scanpy/tools/_utils.py:41: UserWarning: You’re trying to run this on 31986 dimensions of `.X`, if you really want this, set `use_rep='X'`.
+         Falling back to preprocessing with `sc.pp.pca` and default params.
+  warnings.warn(</code></pre>
+</div>
+</div>
 <div id="cell-23" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>adata_iso.plot_isoforms_summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.visuals <span class="im">as</span> vs</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>vs.plot_transcripts(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Nnat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<section id="gene-specific-transcripts-1" class="level3">
-<h3 class="anchored" data-anchor-id="gene-specific-transcripts-1">Gene-Specific Transcripts</h3>
-<p>Method: plot_transcripts_per_cell_type() Visualizes isoform expression across cell types for a specific gene. Parameters: gene_name: The gene to visualize. trs_to_show: List of transcript IDs to include (optional). Usage:</p>
+</div>
+</div>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> allos.visuals <span class="im">as</span> vs</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>vs.plot_transcripts(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Pkm'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>adata_iso.plot_transcripts_per_cell_type(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> allos.switch_search <span class="im">import</span> SwitchSearch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="gene-summary-1" class="level3">
-<h3 class="anchored" data-anchor-id="gene-summary-1">Gene Summary</h3>
-<p>Method: draw_gene_summary() Purpose: Generates a comprehensive visualization of transcript counts, per-cell-type breakdown, and transcripts structures for a specific gene. Parameters: gene_name: Target gene for visualization. trs_to_show: List of transcripts to highlight. Usage:</p>
+<div id="cell-26" class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> SwitchSearch(sicelore_mouse_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div id="cell-27" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>adata_iso.draw_gene_summary(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>switch_list <span class="op">=</span> ss.find_switching_isoforms_wilcoxon(n_jobs<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="statistical-analysis-1" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-analysis-1">Statistical Analysis</h2>
-<ol type="a">
-<li>Find Switching Isoforms Method: find_switching_isoforms() Purpose: Identifies genes with significant isoform switching between cell types using statistical tests. Parameters: cell_group_column: Column specifying cell group labels. min_count: Minimum expression count threshold. min_diff: Minimum expression difference for isoform detection. Usage:</li>
-</ol>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>switch_list.head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">transcript_id</th>
+<th data-quarto-table-cell-role="th">scores</th>
+<th data-quarto-table-cell-role="th">log_fold_change</th>
+<th data-quarto-table-cell-role="th">pvals</th>
+<th data-quarto-table-cell-role="th">pvals_adj</th>
+<th data-quarto-table-cell-role="th">group_1</th>
+<th data-quarto-table-cell-role="th">group_2</th>
+<th data-quarto-table-cell-role="th">contrast</th>
+<th data-quarto-table-cell-role="th">gene_id</th>
+<th data-quarto-table-cell-role="th">n_cells_group_1</th>
+<th data-quarto-table-cell-role="th">n_cells_group_2</th>
+<th data-quarto-table-cell-role="th">total_cells</th>
+<th data-quarto-table-cell-role="th">p_value</th>
+<th data-quarto-table-cell-role="th">direction</th>
+<th data-quarto-table-cell-role="th">percent_expressed_group_1</th>
+<th data-quarto-table-cell-role="th">percent_expressed_group_2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5943</td>
+<td>ENSMUST00000034834.15</td>
+<td>12.270655</td>
+<td>5.354527</td>
+<td>1.301969e-34</td>
+<td>1.156799e-31</td>
+<td>cycling radial glia</td>
+<td>mature Glutamatergic</td>
+<td>cycling radial glia__mature Glutamatergic</td>
+<td>Pkm</td>
+<td>117</td>
+<td>275</td>
+<td>392</td>
+<td>7.113057e-29</td>
+<td>5.354527</td>
+<td>88.888889</td>
+<td>42.181818</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5944</td>
+<td>ENSMUST00000163694.3</td>
+<td>11.957458</td>
+<td>5.027552</td>
+<td>5.935075e-33</td>
+<td>4.630227e-30</td>
+<td>mature Glutamatergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__mature Glutamatergic</td>
+<td>Pkm</td>
+<td>275</td>
+<td>117</td>
+<td>392</td>
+<td>2.160587e-27</td>
+<td>-5.027552</td>
+<td>89.818182</td>
+<td>43.589744</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5959</td>
+<td>ENSMUST00000034834.15</td>
+<td>11.984186</td>
+<td>5.965338</td>
+<td>4.300464e-33</td>
+<td>2.751093e-29</td>
+<td>intermediate progenitor</td>
+<td>mature Glutamatergic</td>
+<td>intermediate progenitor__mature Glutamatergic</td>
+<td>Pkm</td>
+<td>86</td>
+<td>275</td>
+<td>361</td>
+<td>1.154418e-26</td>
+<td>5.965338</td>
+<td>94.186047</td>
+<td>42.181818</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1486</td>
+<td>ENSMUST00000107849.9</td>
+<td>11.684690</td>
+<td>5.028407</td>
+<td>1.526343e-31</td>
+<td>1.038757e-28</td>
+<td>mature Glutamatergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__mature Glutamatergic</td>
+<td>Clta</td>
+<td>275</td>
+<td>117</td>
+<td>392</td>
+<td>3.982160e-26</td>
+<td>-5.028407</td>
+<td>87.636364</td>
+<td>39.316239</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5966</td>
+<td>ENSMUST00000034834.15</td>
+<td>11.383351</td>
+<td>6.386945</td>
+<td>5.061634e-30</td>
+<td>5.996349e-27</td>
+<td>radial glia</td>
+<td>mature Glutamatergic</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Pkm</td>
+<td>68</td>
+<td>275</td>
+<td>343</td>
+<td>1.591441e-24</td>
+<td>-6.386945</td>
+<td>95.588235</td>
+<td>42.181818</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5965</td>
+<td>ENSMUST00000163694.3</td>
+<td>11.155944</td>
+<td>8.147258</td>
+<td>6.697808e-29</td>
+<td>6.121031e-26</td>
+<td>mature Glutamatergic</td>
+<td>radial glia</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Pkm</td>
+<td>275</td>
+<td>68</td>
+<td>343</td>
+<td>1.333826e-23</td>
+<td>8.147258</td>
+<td>89.818182</td>
+<td>16.176471</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1506</td>
+<td>ENSMUST00000107849.9</td>
+<td>10.725714</td>
+<td>8.949328</td>
+<td>7.708972e-27</td>
+<td>5.360417e-24</td>
+<td>mature Glutamatergic</td>
+<td>radial glia</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Clta</td>
+<td>275</td>
+<td>68</td>
+<td>343</td>
+<td>9.377558e-22</td>
+<td>8.949328</td>
+<td>87.636364</td>
+<td>7.352941</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2235</td>
+<td>ENSMUST00000154584.8</td>
+<td>10.596644</td>
+<td>6.462344</td>
+<td>3.088641e-26</td>
+<td>1.975866e-23</td>
+<td>radial glia</td>
+<td>mature Glutamatergic</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Eef1d</td>
+<td>68</td>
+<td>275</td>
+<td>343</td>
+<td>3.237709e-21</td>
+<td>-6.462344</td>
+<td>89.705882</td>
+<td>24.727273</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5940</td>
+<td>ENSMUST00000163694.3</td>
+<td>10.560711</td>
+<td>4.567454</td>
+<td>4.532153e-26</td>
+<td>3.221454e-23</td>
+<td>imature Glutamatergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__imature Glutamatergic</td>
+<td>Pkm</td>
+<td>234</td>
+<td>117</td>
+<td>351</td>
+<td>5.183036e-21</td>
+<td>-4.567454</td>
+<td>84.615385</td>
+<td>43.589744</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1130</td>
+<td>ENSMUST00000030417.9</td>
+<td>10.449820</td>
+<td>7.487224</td>
+<td>1.468039e-25</td>
+<td>8.695686e-23</td>
+<td>mature Glutamatergic</td>
+<td>radial glia</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Cdc42</td>
+<td>275</td>
+<td>68</td>
+<td>343</td>
+<td>1.304437e-20</td>
+<td>7.487224</td>
+<td>85.090909</td>
+<td>14.705882</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1118</td>
+<td>ENSMUST00000030417.9</td>
+<td>10.378815</td>
+<td>4.576591</td>
+<td>3.095947e-25</td>
+<td>1.112662e-22</td>
+<td>mature Glutamatergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__mature Glutamatergic</td>
+<td>Cdc42</td>
+<td>275</td>
+<td>117</td>
+<td>392</td>
+<td>1.657093e-20</td>
+<td>-4.576591</td>
+<td>85.090909</td>
+<td>39.316239</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5955</td>
+<td>ENSMUST00000163694.3</td>
+<td>10.207308</td>
+<td>7.687160</td>
+<td>1.838968e-24</td>
+<td>1.307138e-21</td>
+<td>imature Glutamatergic</td>
+<td>radial glia</td>
+<td>imature Glutamatergic__radial glia</td>
+<td>Pkm</td>
+<td>234</td>
+<td>68</td>
+<td>302</td>
+<td>1.694750e-19</td>
+<td>7.687160</td>
+<td>84.615385</td>
+<td>16.176471</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1484</td>
+<td>ENSMUST00000107849.9</td>
+<td>10.054152</td>
+<td>4.796204</td>
+<td>8.807723e-24</td>
+<td>6.871313e-21</td>
+<td>mature GABAergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__mature GABAergic</td>
+<td>Clta</td>
+<td>172</td>
+<td>117</td>
+<td>289</td>
+<td>8.006304e-19</td>
+<td>-4.796204</td>
+<td>83.139535</td>
+<td>39.316239</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1482</td>
+<td>ENSMUST00000107849.9</td>
+<td>9.975988</td>
+<td>4.470673</td>
+<td>1.941579e-23</td>
+<td>9.857674e-21</td>
+<td>imature Glutamatergic</td>
+<td>cycling radial glia</td>
+<td>cycling radial glia__imature Glutamatergic</td>
+<td>Clta</td>
+<td>234</td>
+<td>117</td>
+<td>351</td>
+<td>1.127442e-18</td>
+<td>-4.470673</td>
+<td>83.760684</td>
+<td>39.316239</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1497</td>
+<td>ENSMUST00000107849.9</td>
+<td>9.958041</td>
+<td>8.391595</td>
+<td>2.326005e-23</td>
+<td>1.458816e-20</td>
+<td>imature Glutamatergic</td>
+<td>radial glia</td>
+<td>imature Glutamatergic__radial glia</td>
+<td>Clta</td>
+<td>234</td>
+<td>68</td>
+<td>302</td>
+<td>1.632402e-18</td>
+<td>8.391595</td>
+<td>83.760684</td>
+<td>7.352941</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">182</td>
+<td>ENSMUST00000044492.9</td>
+<td>9.737172</td>
+<td>6.676501</td>
+<td>2.092979e-22</td>
+<td>1.239741e-19</td>
+<td>imature Glutamatergic</td>
+<td>radial glia</td>
+<td>imature Glutamatergic__radial glia</td>
+<td>Akap9</td>
+<td>234</td>
+<td>68</td>
+<td>302</td>
+<td>1.251917e-17</td>
+<td>6.676501</td>
+<td>83.760684</td>
+<td>22.058824</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1504</td>
+<td>ENSMUST00000107849.9</td>
+<td>9.634603</td>
+<td>8.717126</td>
+<td>5.711261e-22</td>
+<td>3.653608e-19</td>
+<td>mature GABAergic</td>
+<td>radial glia</td>
+<td>mature GABAergic__radial glia</td>
+<td>Clta</td>
+<td>172</td>
+<td>68</td>
+<td>240</td>
+<td>3.464178e-17</td>
+<td>8.717126</td>
+<td>83.139535</td>
+<td>7.352941</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5964</td>
+<td>ENSMUST00000034834.15</td>
+<td>9.557229</td>
+<td>5.815203</td>
+<td>1.209522e-21</td>
+<td>7.439957e-19</td>
+<td>radial glia</td>
+<td>mature GABAergic</td>
+<td>mature GABAergic__radial glia</td>
+<td>Pkm</td>
+<td>68</td>
+<td>172</td>
+<td>240</td>
+<td>6.804876e-17</td>
+<td>-5.815203</td>
+<td>95.588235</td>
+<td>43.023256</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1485</td>
+<td>ENSMUST00000170241.7</td>
+<td>9.399286</td>
+<td>3.665712</td>
+<td>5.493450e-21</td>
+<td>1.417044e-18</td>
+<td>cycling radial glia</td>
+<td>mature Glutamatergic</td>
+<td>cycling radial glia__mature Glutamatergic</td>
+<td>Clta</td>
+<td>117</td>
+<td>275</td>
+<td>392</td>
+<td>1.266246e-16</td>
+<td>3.665712</td>
+<td>83.760684</td>
+<td>47.636364</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1507</td>
+<td>ENSMUST00000170241.7</td>
+<td>9.359902</td>
+<td>4.369593</td>
+<td>7.981022e-21</td>
+<td>3.191012e-18</td>
+<td>radial glia</td>
+<td>mature Glutamatergic</td>
+<td>mature Glutamatergic__radial glia</td>
+<td>Clta</td>
+<td>68</td>
+<td>275</td>
+<td>343</td>
+<td>2.733443e-16</td>
+<td>-4.369593</td>
+<td>89.705882</td>
+<td>47.636364</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 <div id="cell-29" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>switching_genes <span class="op">=</span> adata_iso.find_switching_isoforms(cell_group_column<span class="op">=</span><span class="st">"cell_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vs.plot_transcript_exspression_dotplot(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Clta'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-</section>
-<section id="likelihood-ratio-test-1" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-ratio-test-1">Likelihood Ratio Test</h2>
-<p>Method: __compare_groups() Purpose: Tests for significant isoform usage differences between two groups. Parameters: group_1_label and group_2_label: Names of the groups to compare. cell_group_column: Column specifying cell group labels. gene_id: Gene ID to test.</p>
+</div>
+</div>
+<div id="cell-30" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>vs.plot_transcript_expression_violin(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Clta'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>adata_iso.plot_isoforms_summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>vs.plot_transcript_exspression_dotplot(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Akap9'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<section id="gene-specific-transcripts-2" class="level3">
-<h3 class="anchored" data-anchor-id="gene-specific-transcripts-2">Gene-Specific Transcripts</h3>
-<p>Method: plot_transcripts_per_cell_type() Visualizes isoform expression across cell types for a specific gene. Parameters: gene_name: The gene to visualize. trs_to_show: List of transcript IDs to include (optional). Usage:</p>
+</div>
+</div>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Ensembl URLs for mouse GRCm39 (release 109)</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>gtf_url <span class="op">=</span> <span class="st">"ftp://ftp.ensembl.org/pub/release-109/gtf/mus_musculus/Mus_musculus.GRCm39.109.gtf.gz"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Store data one directory back</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> Path(<span class="st">".."</span>) <span class="op">/</span> <span class="st">"data"</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>data_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>gtf_file_local <span class="op">=</span> data_dir <span class="op">/</span> <span class="st">"Mus_musculus.GRCm39.109.gtf.gz"</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Download if not already present</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> gtf_file_local.is_file():</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Downloading </span><span class="sc">{</span>gtf_url<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    urllib.request.urlretrieve(gtf_url, gtf_file_local)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div id="cell-33" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>adata_iso.plot_transcripts_per_cell_type(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> allos.transcript_plots <span class="im">import</span> TranscriptPlots</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> TranscriptPlots(gtf_file<span class="op">=</span> gtf_file_local)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="gene-summary-2" class="level3">
-<h3 class="anchored" data-anchor-id="gene-summary-2">Gene Summary</h3>
-<p>Method: draw_gene_summary() Purpose: Generates a comprehensive visualization of transcript counts, per-cell-type breakdown, and transcripts structures for a specific gene. Parameters: gene_name: Target gene for visualization. trs_to_show: List of transcripts to highlight. Usage:</p>
+<div id="cell-34" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> allos.switch_search <span class="im">import</span> get_top_n_isoforms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div id="cell-35" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>adata_iso.draw_gene_summary(<span class="st">"GeneName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> get_top_n_isoforms(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Akap9'</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>tp.draw_transcripts_list(top_n, draw_cds<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>WARNING:root:No CDS features found for transcript ENSMUST00000141817.
+WARNING:root:No CDS features found for transcript ENSMUST00000177448.
+WARNING:root:No CDS features found for transcript ENSMUST00000132058.</code></pre>
 </div>
-</section>
-</section>
-<section id="statistical-analysis-2" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-analysis-2">Statistical Analysis</h2>
-<ol type="a">
-<li>Find Switching Isoforms Method: find_switching_isoforms() Purpose: Identifies genes with significant isoform switching between cell types using statistical tests. Parameters: cell_group_column: Column specifying cell group labels. min_count: Minimum expression count threshold. min_diff: Minimum expression difference for isoform detection. Usage:</li>
-</ol>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-22-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-36" class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> get_top_n_isoforms(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Akap9'</span>, strip<span class="op">=</span><span class="va">True</span>, top_n<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>tp.draw_transcripts_list(top_n, draw_cds<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <div id="cell-37" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>switching_genes <span class="op">=</span> adata_iso.find_switching_isoforms(cell_group_column<span class="op">=</span><span class="st">"cell_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> get_top_n_isoforms(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Akap9'</span>, strip<span class="op">=</span><span class="va">False</span>, top_n<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>vs.plot_transcripts(sicelore_mouse_data_copy, transcripts<span class="op">=</span>top_n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-</section>
-<section id="likelihood-ratio-test-2" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-ratio-test-2">Likelihood Ratio Test</h2>
-<p>Method: __compare_groups() Purpose: Tests for significant isoform usage differences between two groups. Parameters: group_1_label and group_2_label: Names of the groups to compare. cell_group_column: Column specifying cell group labels. gene_id: Gene ID to test.</p>
-</section>
-<section id="isoform-rating" class="level2">
-<h2 class="anchored" data-anchor-id="isoform-rating">Isoform Rating</h2>
-<p>Major vs.&nbsp;Minor Isoforms Method: find_major_minor_isoforms() Purpose: Identifies major and minor isoforms for each gene across cell types. Usage:</p>
-<div id="cell-41" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>major_isoforms <span class="op">=</span> adata_iso.find_major_minor_isoforms()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cell-38" class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vs.plot_density_multi(sicelore_mouse_data_copy, features<span class="op">=</span>top_n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-39" class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> get_top_n_isoforms(sicelore_mouse_data_copy, gene_id<span class="op">=</span><span class="st">'Cd63'</span>, strip<span class="op">=</span><span class="va">True</span>, top_n<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>tp.draw_transcripts_list(top_n, draw_cds<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 
 

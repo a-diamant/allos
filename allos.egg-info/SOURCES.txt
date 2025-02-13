@@ -8,6 +8,7 @@ allos/_modidx.py
 allos/anndata_iso.py
 allos/color_palette.py
 allos/gene_report.py
+allos/metacells.py
 allos/preprocessing.py
 allos/readers_tests.py
 allos/switch_search.py

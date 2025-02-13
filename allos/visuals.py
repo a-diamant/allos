@@ -2,7 +2,7 @@
 
 # %% auto 0
 __all__ = ['plot_transcripts', 'normal_reference_bandwidth', 'wkde2d', 'get_dens', 'calculate_density', 'plot_density',
-           'plot_density_multi']
+           'plot_density_multi', 'plot_transcript_exspression_dotplot', 'plot_transcript_expression_violin']
 
 # %% ../nbs/008_visuals.ipynb 2
 import numpy as np
@@ -292,3 +292,346 @@ def plot_density_multi(adata, features, basis="umap", adjust=1.0, cmap="viridis"
 
     plt.tight_layout()
     plt.show()
+
+# %% ../nbs/008_visuals.ipynb 16
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+def plot_transcript_exspression_dotplot(adata, gene_id, cell_labels_column='cell_type', top_n=5):
+    """
+    Plot isoform expression for a selected gene across cell types,
+    with dot color = average expression, and dot size = percent
+    of cells expressing. Two legends: a colorbar for average
+    expression, and a bubble-size legend for pct_expressing.
+
+    DIFFERENT LAYOUT APPROACH:
+    - We use a single figure+axes with plt.tight_layout(rect=[...])
+      to reserve space on the right. 
+    - We place the bubble-size legend as an "in-figure" legend
+      using bbox_to_anchor, so it won't be cut off.
+    """
+
+    sns.set_theme(style='white', context='notebook')
+
+    # ----------------------------------------------------
+    # 1. Identify isoforms for the gene
+    # ----------------------------------------------------
+    isoforms = adata.var[adata.var['geneId'] == gene_id].index
+    if len(isoforms) == 0:
+        print(f"No isoforms found for gene ID: {gene_id}")
+        return
+
+    # (Optional) keep only top_n isoforms by overall average
+    if top_n and len(isoforms) > top_n:
+        overall_expr = adata.to_df()[isoforms].mean()
+        isoforms = overall_expr.sort_values(ascending=False).head(top_n).index
+
+    # ----------------------------------------------------
+    # 2. Average expression by cell type
+    # ----------------------------------------------------
+    avg_expr_list = []
+    for iso in isoforms:
+        means = adata.to_df()[iso].groupby(adata.obs[cell_labels_column], observed=False).mean()
+        df_means = pd.DataFrame({
+            cell_labels_column: means.index,
+            'average_expression': means.values
+        })
+        df_means['isoform'] = iso
+        avg_expr_list.append(df_means)
+    avg_expr_df = pd.concat(avg_expr_list, ignore_index=True)
+
+    # ----------------------------------------------------
+    # 3. Percent of cells expressing each isoform
+    # ----------------------------------------------------
+    pct_expr_list = []
+    for iso in isoforms:
+        pct_expressing = adata.to_df()[iso]\
+            .groupby(adata.obs[cell_labels_column], observed=False)\
+            .apply(lambda x: (x > 0).mean() * 100)
+
+        df_pct = pd.DataFrame({
+            cell_labels_column: pct_expressing.index,
+            'pct_expressing': pct_expressing.values
+        })
+        df_pct['isoform'] = iso
+        pct_expr_list.append(df_pct)
+    pct_expr_df = pd.concat(pct_expr_list, ignore_index=True)
+
+    # ----------------------------------------------------
+    # 4. Merge the average and pct data
+    # ----------------------------------------------------
+    plot_df = pd.merge(avg_expr_df, pct_expr_df,
+                       on=['isoform', cell_labels_column],
+                       how='left')
+
+    # Drop columns that are all NaN or all zero
+    plot_df.dropna(axis=1, how='all', inplace=True)
+    numeric_cols = plot_df.select_dtypes(include=[np.number]).columns
+    all_zero = (plot_df[numeric_cols] == 0).all(axis=0)
+    plot_df.drop(columns=all_zero[all_zero].index, inplace=True)
+
+    # ----------------------------------------------------
+    # 5. Clean labels & drop blank cell types
+    # ----------------------------------------------------
+    plot_df['display_isoform'] = plot_df['isoform'].astype(str)
+    plot_df['gene_isoform'] = gene_id + "–" + plot_df['display_isoform']
+
+    plot_df = plot_df[plot_df[cell_labels_column].astype(str).str.strip() != '']
+
+    # ----------------------------------------------------
+    # 6. Filter out cell-types / isoforms with zero sums
+    # ----------------------------------------------------
+    plot_df = plot_df.groupby(cell_labels_column, observed=False).filter(
+        lambda grp: (grp['average_expression'].sum() > 0) or
+                    (grp['pct_expressing'].sum() > 0)
+    )
+    plot_df = plot_df.groupby('isoform', observed=False).filter(
+        lambda grp: (grp['average_expression'].sum() > 0) or
+                    (grp['pct_expressing'].sum() > 0)
+    )
+
+    # ----------------------------------------------------
+    # 7. Convert to categorical + remove unused
+    # ----------------------------------------------------
+    plot_df[cell_labels_column] = plot_df[cell_labels_column].astype('category')
+    plot_df['isoform'] = plot_df['isoform'].astype('category')
+    plot_df[cell_labels_column] = plot_df[cell_labels_column].cat.remove_unused_categories()
+    plot_df['isoform'] = plot_df['isoform'].cat.remove_unused_categories()
+
+    # Sort so the x-axis follows category order
+    cat_order = list(plot_df[cell_labels_column].cat.categories)
+    plot_df[cell_labels_column] = plot_df[cell_labels_column].cat\
+        .reorder_categories(cat_order, ordered=True)
+    plot_df.sort_values(by=cell_labels_column, inplace=True)
+
+    # ----------------------------------------------------
+    # 8. Create figure & axes (no constrained layout)
+    # ----------------------------------------------------
+    fig_width = 25
+    fig_height = max(5, plot_df['isoform'].nunique() * 0.8)
+    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+    # We'll use tight_layout with rect=... to keep space on the right
+    plt.tight_layout(rect=[0, 0, 0.78, 1])  # leave 22% on right side
+
+    # ----------------------------------------------------
+    # 9. Scatterplot: hue=average_expr, size=pct_expr
+    # ----------------------------------------------------
+    vmin = plot_df['average_expression'].min() if 'average_expression' in plot_df else 0
+    vmax = plot_df['average_expression'].max() if 'average_expression' in plot_df else 1
+
+    scatter = sns.scatterplot(
+        data=plot_df,
+        x=cell_labels_column,
+        y='gene_isoform',
+        hue='average_expression',     # color scale
+        size='pct_expressing',        # bubble size
+        palette='viridis',
+        sizes=(50, 300),
+        edgecolor='white',
+        alpha=0.9,
+        legend=False,  # We'll add custom legends
+        hue_norm=plt.Normalize(vmin, vmax),
+        ax=ax
+    )
+
+    ax.set_title(f'Differential Isoform Expression for {gene_id}', fontsize=16, pad=20)
+    ax.set_xlabel('Cell Type', fontsize=13)
+    ax.set_ylabel('Gene–Isoform', fontsize=13)
+    sns.despine(ax=ax)
+
+    # ----------------------------------------------------
+    # 10. Color bar for average_expression
+    # ----------------------------------------------------
+    if 'average_expression' in plot_df:
+        norm = plt.Normalize(vmin=vmin, vmax=vmax)
+        sm = plt.cm.ScalarMappable(norm=norm, cmap='viridis')
+        sm.set_array([])
+        cbar = fig.colorbar(sm, ax=ax, fraction=0.05, pad=0.02)
+        cbar.set_label('Average Expression', fontsize=12)
+
+    # ----------------------------------------------------
+    # 11. Bubble-size legend for pct_expressing
+    #     We'll place it inside the figure to the right
+    # ----------------------------------------------------
+    if 'pct_expressing' in plot_df:
+        size_bins = [0, 25, 50, 75, 100]
+        size_handles = []
+        for val in size_bins:
+            # Map 0..100 to size range 50..300
+            marker_size = np.interp(val, [0, 100], [50, 300])
+            size_handles.append(
+                plt.scatter([], [], s=marker_size, color='gray',
+                            alpha=0.9, edgecolor='white')
+            )
+        size_labels = [f"{int(val)}%" for val in size_bins]
+
+        # Place bubble legend in the middle-right
+        legend_size = ax.legend(
+            size_handles,
+            size_labels,
+            title='Pct. Expressing',
+            loc='center left',         # place vertically centered
+            bbox_to_anchor=(1.08, 0.75),
+            frameon=False,
+            fontsize=10,
+            title_fontsize=12
+        )
+        ax.add_artist(legend_size)
+
+    # ----------------------------------------------------
+    # 12. Final touches: rotate x labels, show plot
+    # ----------------------------------------------------
+    plt.xticks(rotation=45, ha='right', fontsize=11)
+    plt.show()
+
+
+
+
+# %% ../nbs/008_visuals.ipynb 18
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+def plot_transcript_expression_violin(
+    adata,
+    gene_id,
+    cell_labels_column='cell_type',
+    top_n=5,
+    figsize_per_isoform=(4, 4)
+):
+    """
+    Plot isoform expression for a selected gene across cell types,
+    using violin plots (with each cell's expression as a point).
+
+    Parameters
+    ----------
+    adata : AnnData
+        Single-cell AnnData object with .obs (cells) and .var (features).
+    gene_id : str
+        The gene ID to filter isoforms by (adata.var['geneId']).
+    cell_labels_column : str
+        Column name in adata.obs specifying the cell type or cluster label.
+    top_n : int or None
+        If not None, keeps only the top-n isoforms by overall mean expression.
+    figsize_per_isoform : tuple
+        Width and height (in inches) for each isoform subplot.
+    """
+
+    sns.set_theme(style='white', context='notebook')
+    
+    # ----------------------------------------------------
+    # 1. Identify isoforms for the gene
+    # ----------------------------------------------------
+    isoforms = adata.var[adata.var['geneId'] == gene_id].index
+    if len(isoforms) == 0:
+        print(f"No isoforms found for gene ID: {gene_id}")
+        return
+
+    # (Optional) keep only top_n isoforms by overall average
+    if top_n and len(isoforms) > top_n:
+        overall_expr = adata.to_df()[isoforms].mean()
+        isoforms = overall_expr.sort_values(ascending=False).head(top_n).index
+
+    # ----------------------------------------------------
+    # 2. Collect expressions in a "long" DataFrame
+    #    with columns: [cell_type, isoform, expression]
+    # ----------------------------------------------------
+    expr_df = adata.to_df()[isoforms].copy()
+    expr_df[cell_labels_column] = adata.obs[cell_labels_column].values
+
+    # Melt so that each row = one cell's expression for one isoform
+    plot_df = expr_df.melt(
+        id_vars=cell_labels_column, 
+        var_name='isoform', 
+        value_name='expression'
+    )
+
+    # Remove any cells that have an empty label
+    plot_df = plot_df[plot_df[cell_labels_column].astype(str).str.strip() != '']
+    
+    # Remove any isoform or cell-type with zero expression across all cells.
+    # Explicitly pass observed=False to retain the current behavior.
+    plot_df = plot_df.groupby('isoform', observed=False).filter(lambda g: g['expression'].sum() > 0)
+    plot_df = plot_df.groupby(cell_labels_column, observed=False).filter(lambda g: g['expression'].sum() > 0)
+
+    # Make the cell type and isoform columns categorical (optional)
+    plot_df[cell_labels_column] = plot_df[cell_labels_column].astype('category')
+    plot_df['isoform'] = plot_df['isoform'].astype('category')
+
+    # Sort categories so subplots come out in a stable order
+    plot_df[cell_labels_column] = plot_df[cell_labels_column].cat.remove_unused_categories()
+    plot_df['isoform'] = plot_df['isoform'].cat.remove_unused_categories()
+
+    isoforms_used = plot_df['isoform'].cat.categories
+    n_isoforms = len(isoforms_used)
+
+    # ----------------------------------------------------
+    # 3. Create subplots: one panel per isoform
+    # ----------------------------------------------------
+    fig_width = figsize_per_isoform[0] * n_isoforms
+    fig_height = figsize_per_isoform[1]
+    fig, axes = plt.subplots(
+        1, n_isoforms,
+        figsize=(fig_width, fig_height),
+        sharey=True
+    )
+
+    # If there's only 1 isoform, wrap axes in a list for consistency
+    if n_isoforms == 1:
+        axes = [axes]
+
+    # ----------------------------------------------------
+    # 4. Plot each isoform's distribution using violin + strip
+    # ----------------------------------------------------
+    for i, iso in enumerate(isoforms_used):
+        ax = axes[i]
+        subset = plot_df[plot_df['isoform'] == iso]
+        
+        # Violin plot with updated parameters:
+        # - Use density_norm='width' instead of scale='width'
+        # - Set hue to cell_labels_column and legend=False to avoid deprecation warnings with palette.
+        sns.violinplot(
+            data=subset,
+            x=cell_labels_column,
+            y='expression',
+            hue=cell_labels_column,
+            ax=ax,
+            density_norm='width',
+            cut=0,
+            palette='viridis',
+            legend=False
+        )
+        
+        # Strip plot (each cell as a point)
+        sns.stripplot(
+            data=subset,
+            x=cell_labels_column,
+            y='expression',
+            ax=ax,
+            color='k',
+            size=2,
+            alpha=0.6,
+            dodge=True
+        )
+        
+        ax.set_title(f"{gene_id} — {iso}", fontsize=12)
+        ax.set_xlabel("")
+        if i > 0:
+            # Hide y label for all but the first subplot
+            ax.set_ylabel("")
+
+        # Rotate x-axis labels using plt.setp to avoid FixedLocator warnings
+        plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
+
+    # ----------------------------------------------------
+    # 5. Final formatting
+    # ----------------------------------------------------
+    fig.suptitle(f'Violin plots of expression for {gene_id}', fontsize=14)
+    sns.despine(left=True, bottom=True)
+    plt.tight_layout()
+    plt.show()
+
+

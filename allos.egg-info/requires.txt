@@ -12,5 +12,6 @@ fastcore
 pyranges
 pyfaidx
 numpy
+jinja2
 
 [dev]

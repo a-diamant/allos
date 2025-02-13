@@ -13,6 +13,8 @@ import pyranges as pr
 from pyfaidx import Fasta
 import logging
 import re
+from typing import Any, Dict
+
 
 # %% ../nbs/002_transcript_data.ipynb 4
 class TranscriptData:
@@ -550,50 +552,116 @@ class TranscriptData:
         df.reset_index(drop=True, inplace=True)
         return df
     
-    def get_gene_names_for_transcripts(self, transcript_ids: List[str], ignore_after_period: bool = True) -> List[Optional[str]]:
+    def get_gene_names_for_transcripts(self, transcript_ids: List[str], ignore_after_period: bool = True, alternative_column: Optional[str] = None) -> List[Optional[str]]:
         """
         Given a list of transcript IDs, return a list of the same length
-        where each element is the corresponding gene_name from the GTF.
-        If a transcript is not found or if no 'gene_name' column exists,
+        where each element is the corresponding gene name or alternative column value from the GTF.
+        If a transcript is not found or if the target column is not available in the GTF,
         the result will contain None for that transcript.
 
         Args:
             transcript_ids (List[str]): A list of transcript IDs.
             ignore_after_period (bool): If True, strip the version suffix after the period.
+            alternative_column (Optional[str]): If provided, use this column in place of 'gene_name'.
 
         Returns:
-            List[Optional[str]]: A parallel list of gene names or None.
+            List[Optional[str]]: A parallel list of gene names (or alternative column values) or None.
         """
         # Optionally strip the version suffix using regex
         if ignore_after_period:
             transcript_ids = [re.sub(r"\.\d+$", "", tid) for tid in transcript_ids]
 
         df = self.gr.df
-        # Fix this check so it actually tests for "gene_name":
-        if "gene_name" not in df.columns:
-            logging.warning("No 'gene_name' column in GTF; cannot retrieve gene names.")
+        target_column = alternative_column if alternative_column is not None else "gene_name"
+        
+        if target_column not in df.columns:
+            logging.warning(f"No '{target_column}' column in GTF; cannot retrieve gene names.")
             return [None] * len(transcript_ids)
 
         # Filter to only the rows with the requested transcript IDs
         subset = df[df.transcript_id.isin(transcript_ids)]
 
-        # Build a dict: transcript_id -> set/list of gene_names from the annotation
+        # Build a dict: transcript_id -> list of unique values from the target column in the annotation
         mapping = (
             subset
-            .groupby("transcript_id")["gene_name"]
+            .groupby("transcript_id")[target_column]
             .apply(lambda x: list(x.unique()))
             .to_dict()
         )
 
-        # For each transcript in the input, pick the first gene_name from the mapping
+        # For each transcript in the input, pick the first value from the mapping
         result = []
         for tid in transcript_ids:
             possible_names = mapping.get(tid, [])
-            if len(possible_names) > 0:
+            if possible_names:
                 result.append(possible_names[0])
             else:
                 result.append(None)
 
         return result
+    
+    def get_transcript_info(self, transcript_id: str) -> Dict[str, Any]:
+        """
+        Return a dictionary with basic info about the given transcript, including:
+        - transcript_id
+        - transcript_name (if available in the GTF, else "unknown")
+        - transcript_type (if available in the GTF, else "unknown")
+        - cds_start, cds_end (based on min/max of CDS ranges if present, else None)
+        - chromosome
+        - strand (either '+' or '-')
+        """
+        df = self.gr.df
+        sub = df[df.transcript_id == transcript_id]
+
+        # If we didn't find this transcript at all, return an empty dict or raise an error.
+        if sub.empty:
+            logging.warning(f"Transcript {transcript_id} not found in GTF.")
+            return {}
+
+        # Pull transcript_name, transcript_type from columns if they exist
+        # (these column names vary in different GTF sources).
+        if "transcript_name" in sub.columns:
+            transcript_name = sub["transcript_name"].dropna().unique()
+            if len(transcript_name) > 0:
+                transcript_name = transcript_name[0]
+            else:
+                transcript_name = "unknown"
+        else:
+            transcript_name = "unknown"
+        
+        if "transcript_type" in sub.columns:
+            transcript_type = sub["transcript_type"].dropna().unique()
+            if len(transcript_type) > 0:
+                transcript_type = transcript_type[0]
+            else:
+                transcript_type = "unknown"
+        else:
+            transcript_type = "unknown"
+
+        # Derive chromosome and strand from any row of this transcript
+        # (assuming a consistent chromosome/strand for all features).
+        chromosome = str(sub["Chromosome"].iloc[0])
+        strand_symbol = str(sub["Strand"].iloc[0])  # '+' or '-'
+
+        # Compute the CDS boundaries using our existing get_cds() method.
+        cds_ranges = self.get_cds(transcript_id)
+        if len(cds_ranges) > 0:
+            cds_df = cds_ranges.df
+            cds_start = int(cds_df["Start"].min())
+            cds_end = int(cds_df["End"].max())
+        else:
+            cds_start = None
+            cds_end = None
+
+        return {
+            "transcript_id": transcript_id,
+            "transcript_name": transcript_name,
+            "transcript_type": transcript_type,
+            "cds_start": cds_start,
+            "cds_end": cds_end,
+            "chromosome": chromosome,
+            "strand": strand_symbol
+        }
+
 
 
