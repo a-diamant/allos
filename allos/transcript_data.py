@@ -237,6 +237,38 @@ class TranscriptData:
         if len(t_ids) == 0:
             logging.warning(f"No transcripts found for gene ID {gene_id}.")
         return list(t_ids)
+    def get_gene_coordinates(self, gene_id: str) -> Optional[pr.PyRanges]:
+        """
+        Retrieve the genomic coordinates of a given gene.
+
+        Args:
+            gene_id (str): The gene ID to look up.
+
+        Returns:
+            pr.PyRanges: A PyRanges object with the gene's coordinates.
+                        Returns None if the gene is not found.
+        """
+        gene_ranges = self.gr[self.gr.gene_id == gene_id]
+        
+        if gene_ranges.empty:
+            logging.warning(f"No coordinates found for gene ID {gene_id}.")
+            return None
+
+        # Extract the minimum start and maximum end positions
+        chrom = gene_ranges.Chromosome.iloc[0]
+        strand = gene_ranges.Strand.iloc[0]
+        start = gene_ranges.Start.min()
+        end = gene_ranges.End.max()
+
+        gene_df = pd.DataFrame({
+            "Chromosome": [chrom],
+            "Start": [start],
+            "End": [end],
+            "Strand": [strand],
+            "gene_id": [gene_id]
+        })
+
+        return pr.PyRanges(gene_df)
 
     def get_transcripts_by_gene_name(self, gene_name: str) -> List[str]:
         """
